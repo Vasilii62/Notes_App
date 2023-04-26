@@ -144,11 +144,18 @@ def search_notes_by_time():
             print(f"{note['id']}\t{note['title']}\t{note['created_at']}\t{note['updated_at']}")
 
 
-
-
 def exit():
     sys.exit(0)
 
+def sort_notes_by_titles():
+    notes = load_notes()
+    sorted_notes = sorted(notes, key=lambda x: x['title'])
+    if len(sorted_notes) == 0:
+        print("No notes found.")
+    else:
+        print("ID\tTitle")
+        for note in sorted_notes:
+            print(f"{note['id']}\t{note['title']}")
 
 def main():
     while True:
@@ -160,7 +167,8 @@ def main():
         print("5. Delete Note")
         print("6. Search Note by Title")
         print("7. Search Note by Time")
-        print("8. Exit")
+        print("8. Search Note by Titles")
+        print("9. Exit")
 
         choice = input("Enter choice: ")
 
@@ -179,6 +187,8 @@ def main():
         elif choice == "7":
             search_notes_by_time()
         elif choice == "8":
+            sort_notes_by_titles()
+        elif choice == "9":
             exit()
         else:
             print("Invalid choice. Please try again.")
