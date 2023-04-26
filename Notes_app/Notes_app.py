@@ -52,15 +52,18 @@ def view_note():
     if len(notes) == 0:
         print("No notes found.")
     else:
-        note_id = int(input("Enter note ID: "))
-        note = next((note for note in notes if note["id"] == note_id), None)
-        if note is None:
-            print("Note not found.")
-        else:
-            print(f"Title: {note['title']}")
-            print(f"Body: {note['body']}")
-            print(f"Created at: {note['created_at']}")
-            print(f"Updated at: {note['updated_at']}")
+        try:
+            note_id = int(input("Enter note ID: "))
+            note = next((note for note in notes if note["id"] == note_id), None)
+            if note is None:
+                print("Note not found.")
+            else:
+                print(f"Title: {note['title']}")
+                print(f"Body: {note['body']}")
+                print(f"Created at: {note['created_at']}")
+                print(f"Updated at: {note['updated_at']}")
+        except ValueError:
+            print("Invalid input. Please enter a valid note ID.")
 
 
 def edit_note():
@@ -69,7 +72,12 @@ def edit_note():
     if len(notes) == 0:
         print("No notes found.")
     else:
-        note_id = int(input("Enter note ID: "))
+        try:
+            note_id = int(input("Enter note ID: "))
+        except ValueError:
+            print("Invalid note ID.")
+            return
+
         note = next((note for note in notes if note["id"] == note_id), None)
         if note is None:
             print("Note not found.")
