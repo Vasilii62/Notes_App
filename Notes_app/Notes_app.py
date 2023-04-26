@@ -90,10 +90,16 @@ def edit_note():
             print("Note updated successfully.")
 
 
-# Удаление заметки по ID
 def delete_note():
     notes = load_notes()  # Получаем список заметок
-    note_id = int(input("Введите ID заметки, которую нужно удалить: "))
+    note_id = input("Введите ID заметки, которую нужно удалить: ")
+
+    try:
+        note_id = int(note_id)
+    except ValueError:
+        print("Ошибка: ID должен быть целым числом")
+        return
+
     note_found = False
 
     # Проходимся по всем заметкам и удаляем заметку с заданным ID
