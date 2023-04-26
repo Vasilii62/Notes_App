@@ -157,6 +157,16 @@ def sort_notes_by_titles():
         for note in sorted_notes:
             print(f"{note['id']}\t{note['title']}")
 
+def sort_notes_by_date():
+    notes = load_notes()
+    sorted_notes = sorted(notes, key=lambda x: x['created_at'])
+    if len(sorted_notes) == 0:
+        print("No notes found.")
+    else:
+        print("ID\tTitle\tCreated At\tUpdated At")
+        for note in sorted_notes:
+            print(f"{note['id']}\t{note['title']}\t{note['created_at']}\t{note['updated_at']}")
+
 def main():
     while True:
         print("\nNote App\n")
@@ -167,8 +177,9 @@ def main():
         print("5. Delete Note")
         print("6. Search Note by Title")
         print("7. Search Note by Time")
-        print("8. Search Note by Titles")
-        print("9. Exit")
+        print("8. Sort Notes by Titles")
+        print("9. Sort Notes by Date")
+        print("10. Exit")
 
         choice = input("Enter choice: ")
 
@@ -189,6 +200,8 @@ def main():
         elif choice == "8":
             sort_notes_by_titles()
         elif choice == "9":
+            sort_notes_by_date()
+        elif choice == "10":
             exit()
         else:
             print("Invalid choice. Please try again.")
